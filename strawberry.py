@@ -1,25 +1,38 @@
+# ================================================================
+#
+#	Logs the bot.
+#
+#	$License: GPL-2.0-only
+#	$Author: The Kumor
+#
+# =================================================================
+
 import discord
+from discord import app_commands
 import os
 from dotenv import load_dotenv
+
+import commands.ping
 
 load_dotenv()
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 class Client(discord.Client):
+	def __init__(self):
+		intents = intents=discord.Intents.default()
+		intents.message_content = True
+		super().__init__(intents=intents)
+
+		self.tree = app_commands.CommandTree(self)
+
 	async def on_ready(self):
 		print(f'Logged in as {self.user} (ID: {self.user.id})')
 		print('------')
 
-	async def on_message(self, message):
-		if message.author == self.user:
-			return
+	async def setup_hook(self):
+		self.tree.add_command(commands.ping.ping)
+		await self.tree.sync()
 
-		if message.content.startswith('!hello'):
-			await message.channel.send('Hello!')
-	
-intents = discord.Intents.default()
-intents.message_content = True
-
-client = Client(intents=intents)
+client = Client()
 client.run(TOKEN)
