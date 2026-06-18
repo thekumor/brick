@@ -41,4 +41,4 @@ async def GetChars(interaction):
 
 	await interaction.response.send_message(f"Your character count: {count}", ephemeral = True)
 
-register = app_commands.Command(name="chars", description="Tells how many characters you've typed.", callback = GetChars)
+chars = app_commands.Command(name="chars", description="Tells how many characters you've typed.", callback = GetChars)
