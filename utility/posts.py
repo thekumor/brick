@@ -14,5 +14,8 @@ path = "/var/brick/"
 posts = sqlite3.connect(path + "brick.db")
 cursor = posts.cursor()
 
-cursor.execute("CREATE DATABASE IF NOT EXISTS brick;")
+cursor.execute("CREATE TABLE IF NOT EXISTS users(" \
+"id INTEGER PRIMARY KEY AUTOINCREMENT," \
+"discord_id INTEGER," \
+"char_count INTEGER);")
 posts.commit()
