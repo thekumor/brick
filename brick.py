@@ -32,7 +32,7 @@ class Client(discord.Client):
 		print('------')
 
 		db = Database()
-		db.Create()
+		db.Create(self)
 
 	async def setup_hook(self):
 		self.tree.add_command(ping.ping)
