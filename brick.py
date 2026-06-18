@@ -12,7 +12,8 @@ from discord import app_commands
 import os
 from dotenv import load_dotenv
 
-import commands.ping
+from commands import *
+from utility import *
 
 load_dotenv()
 
@@ -33,6 +34,9 @@ class Client(discord.Client):
 	async def setup_hook(self):
 		self.tree.add_command(commands.ping.ping)
 		await self.tree.sync()
+
+	#async def on_message(message):
+		
 
 client = Client()
 client.run(TOKEN)
