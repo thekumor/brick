@@ -13,7 +13,7 @@ import os
 from dotenv import load_dotenv
 
 from commands import ping
-from utility import Database
+from utility.database import Database
 
 load_dotenv()
 
