@@ -2,8 +2,8 @@
 #
 #	Creates a ping/pong command.
 #
-#	$License: GPL-2.0-only
-#	$Author: The Kumor
+#	#License: GPL-2.0-only
+#	#Authors: The Kumor
 #
 # =================================================================
 

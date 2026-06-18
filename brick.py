@@ -2,8 +2,8 @@
 #
 #	Logs the bot.
 #
-#	$License: GPL-2.0-only
-#	$Author: The Kumor
+#	#License: GPL-2.0-only
+#	#Authors: The Kumor
 #
 # =================================================================
 
@@ -20,7 +20,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 class Client(discord.Client):
 	def __init__(self):
-		intents = intents=discord.Intents.default()
+		intents=discord.Intents.default()
 		intents.message_content = True
 		super().__init__(intents=intents)
 
