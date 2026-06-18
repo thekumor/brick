@@ -11,7 +11,7 @@ from discord import app_commands
 import sqlite3
 import os
 
-def RegisterUsers(interaction):
+async def RegisterUsers(interaction):
 	path = "/var/brick/databases"
 
 	posts = sqlite3.connect(os.path.join(path, str(interaction.guild.id) + ".db"))
@@ -29,10 +29,10 @@ def RegisterUsers(interaction):
 				"INSERT INTO users(discord_id, char_count) VALUES(?, ?)",
 				(member.id, 0)
 				)
-			posts.commit()
-
+		
+	posts.commit()
 	posts.close()
 
-	interaction.response.send_message("Registered all users successfully", ephemeral = True)
+	await interaction.response.send_message("Registered all users successfully", ephemeral = True)
 
 register = app_commands.Command(name="register", description="Registers everybody.", callback = RegisterUsers)
