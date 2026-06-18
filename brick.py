@@ -12,8 +12,8 @@ from discord import app_commands
 import os
 from dotenv import load_dotenv
 
-from commands import *
-from utility import *
+from commands import ping
+from utility import posts
 
 load_dotenv()
 
@@ -32,7 +32,7 @@ class Client(discord.Client):
 		print('------')
 
 	async def setup_hook(self):
-		self.tree.add_command(commands.ping.ping)
+		self.tree.add_command(ping.ping)
 		await self.tree.sync()
 
 	#async def on_message(message):
