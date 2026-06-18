@@ -15,6 +15,14 @@ class Database:
         self.path = "/var/brick"
 
     def Create(self, bot):
+        # #Section: folder creation
+        dir = os.path.join(self.path, "databases")
+
+        if not os.path.exists(dir):
+            os.mkdir(dir)
+
+        # #Section: database creation
+
         for guild in bot.guilds:
             dbPath = os.path.join(self.path, f"{guild.id}.db")
             conn = sqlite3.connect(dbPath)
@@ -30,3 +38,5 @@ class Database:
 
             conn.commit()
             conn.close()
+        
+        # #EndSection
