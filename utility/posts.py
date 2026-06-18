@@ -9,7 +9,9 @@
 
 import sqlite3
 
-posts = sqlite3.connect("brick.db")
+path = "/var/brick/"
+
+posts = sqlite3.connect(path + "brick.db")
 cursor = posts.cursor()
 
 cursor.execute("CREATE DATABASE IF NOT EXISTS brick;")
