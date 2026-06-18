@@ -12,7 +12,7 @@ from discord import app_commands
 import os
 from dotenv import load_dotenv
 
-from commands import ping, register
+from commands import ping, register, chars
 from utility.database import Database
 
 load_dotenv()
@@ -37,6 +37,7 @@ class Client(discord.Client):
 	async def setup_hook(self):
 		self.tree.add_command(ping.ping)
 		self.tree.add_command(register.register)
+		self.tree.add_command(chars.chars)
 		await self.tree.sync()
 		
 
