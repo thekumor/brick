@@ -24,7 +24,7 @@ class Database:
         # #Section: database creation
 
         for guild in bot.guilds:
-            dbPath = os.path.join(self.path, f"{guild.id}.db")
+            dbPath = os.path.join(dir, f"{guild.id}.db")
             conn = sqlite3.connect(dbPath)
             cursor = conn.cursor()
 
