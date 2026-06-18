@@ -13,7 +13,7 @@ import os
 from dotenv import load_dotenv
 
 from commands import ping
-from utility import posts
+from utility import Database
 
 load_dotenv()
 
@@ -31,11 +31,12 @@ class Client(discord.Client):
 		print(f'Logged in as {self.user} (ID: {self.user.id})')
 		print('------')
 
+		db = Database()
+		db.Create()
+
 	async def setup_hook(self):
 		self.tree.add_command(ping.ping)
 		await self.tree.sync()
-
-	#async def on_message(message):
 		
 
 client = Client()
