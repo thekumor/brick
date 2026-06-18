@@ -20,7 +20,7 @@ def RegisterUsers(interaction):
 	for member in interaction.guild.members:
 		cursor.execute(
 			"SELECT 1 FROM users WHERE discord_id = ?",
-			(member.id)
+			(member.id,)
 		)
 		exists = cursor.fetchone()
 
