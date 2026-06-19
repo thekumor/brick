@@ -28,6 +28,9 @@ async def ShowLeaderboard(interaction):
 			lines.append("### #" + str(i) + ": " + member.name + " - " + str(charCount) + "\n")
 			i += 1
 
+		if i > 20:
+			break
+
 	leaderboardMessageString = "".join(lines)
 	leaderboardMessageString = f"# === {interaction.guild.name} Leaderboard ===\n" + leaderboardMessageString
 
