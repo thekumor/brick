@@ -45,6 +45,13 @@ class Client(discord.Client):
 	async def on_message(self, message):
 		if message.author.bot:
 			return
+		
+		oldValue = utility.database.BrickDatabase.GetValue(message.guild, "users", "char_count", message.author.id, "discord_id") or 0
+		
+		# I think this only applies to no-attachement messages or something.
+		newValue = oldValue + len(message.clean_content)
+
+		utility.database.BrickDatabase.SetValue(message.guild, "users", "char_count", message.author.id, "discord_id", newValue)
 
 client = Client()
 client.run(TOKEN)

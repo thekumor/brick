@@ -69,11 +69,11 @@ class Database:
 			)
 			""", True)
 
-	def SetValue(self, guild, table, id, key, value):
+	def SetValue(self, guild, table, column, expected, key, value):
 		connection = self.GetConnection(guild)
 
 		if connection is not None:
-			connection.Do(f"UPDATE {table} SET {key} = {value} WHERE id = {id}", True)
+			connection.Do(f"UPDATE {table} SET {key} = {value} WHERE {column} = {expected}", True)
 
 	def NewEntry(self, guild, table, keys, values):
 		connection = self.GetConnection(guild)
@@ -102,11 +102,11 @@ class Database:
 		
 		return None
 	
-	def IncrementValue(self, guild, table, id, key):
-		value = self.GetValue(guild, table, id, key)
+	def IncrementValue(self, guild, table, column, expected, key):
+		value = self.GetValue(guild, table, column, expected, key)
 
 		if value is not None:
-			self.SetValue(guild, table, id, key, int(value) + 1)
+			self.SetValue(guild, table, column, key, int(value) + 1)
 
 BrickDatabase = None
 def CreateGlobalDatabase():
