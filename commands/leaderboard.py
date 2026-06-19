@@ -26,6 +26,7 @@ async def ShowLeaderboard(interaction):
 
 		if member is not None:
 			lines.append("### #" + str(i) + ": " + member.name + " - " + str(charCount) + "\n")
+			i += 1
 
 	leaderboardMessageString = "".join(lines)
 	leaderboardMessageString = f"# === {interaction.guild.name} Leaderboard ===\n" + leaderboardMessageString

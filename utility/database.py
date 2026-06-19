@@ -98,9 +98,6 @@ class Database:
 
 			row = connection.GetRow()
 
-			if row is None:
-				return None
-
 			return row[0]
 		
 		return None
@@ -114,9 +111,6 @@ class Database:
 			connection.Do(f"SELECT {formatColumns} FROM {table} ORDER BY {orderColumn} DESC;")
 
 			row = connection.GetRows()
-
-			if row is None:
-				return None
 
 			return row
 		
