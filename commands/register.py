@@ -10,7 +10,7 @@
 from discord import app_commands
 import sqlite3
 import os
-from utility.database import BrickDatabase
+import utility.database
 
 async def RegisterUsers(interaction):
 	amount = 0
