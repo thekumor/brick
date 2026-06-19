@@ -87,11 +87,11 @@ class Database:
 			INSERT INTO {table}({formatKeys}) VALUES({formatValues});
 			 """, True)
 
-	def GetValue(self, guild, table, id, key):
+	def GetValue(self, guild, table, column, expected, key):
 		connection = self.GetConnection(guild)
 
 		if connection is not None:
-			connection.Do(f"SELECT {key} FROM {table} WHERE id = {id}")
+			connection.Do(f"SELECT {key} FROM {table} WHERE {column} = {expected}")
 
 			row = connection.GetRow()
 
