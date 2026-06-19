@@ -36,7 +36,7 @@ class Client(discord.Client):
 
 		#self.Database = Database()
 		#self.Database.Create(self)
-		utility.database.BrickDatabase.Create()
+		utility.database.BrickDatabase.Create(self)
 
 	async def setup_hook(self):
 		self.tree.add_command(ping.ping)
