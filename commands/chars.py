@@ -11,8 +11,6 @@
 # =================================================================
 
 from discord import app_commands
-import sqlite3
-import os
 import utility.database
 
 async def GetChars(interaction):

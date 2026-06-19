@@ -98,6 +98,9 @@ class Database:
 
 			row = connection.GetRow()
 
+			if row is None:
+				return None
+			
 			return row[0]
 		
 		return None
