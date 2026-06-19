@@ -16,6 +16,9 @@ async def RegisterUsers(interaction):
 	amount = 0
 
 	for member in interaction.guild.members:
+		if member.bot:
+			continue
+		
 		utility.database.BrickDatabase.NewEntry(interaction.guild, "users", ["discord_id", "char_count"], [member.id, 0])
 		amount += 1
 
