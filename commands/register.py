@@ -19,8 +19,9 @@ async def RegisterUsers(interaction):
 		if member.bot:
 			continue
 		
-		utility.database.BrickDatabase.NewEntry(interaction.guild, "users", ["discord_id", "char_count"], [member.id, 0])
-		amount += 1
+		if utility.database.BrickDatabase.GetValue(interaction.guild, "users", member.id, "*") is None:
+			utility.database.BrickDatabase.NewEntry(interaction.guild, "users", ["discord_id", "char_count"], [member.id, 0])
+			amount += 1
 
 	await interaction.response.send_message(f"Registered all {amount} users successfully.", ephemeral = True)
 
