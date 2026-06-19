@@ -13,7 +13,7 @@ import os
 from dotenv import load_dotenv
 
 from commands import ping, register, chars
-from utility.database import Database
+from utility.database import Database, CreateGlobalDatabase, BrickDatabase
 
 load_dotenv()
 
@@ -28,12 +28,15 @@ class Client(discord.Client):
 
 		self.tree = app_commands.CommandTree(self)
 
+		CreateGlobalDatabase()
+
 	async def on_ready(self):
 		print(f"Logged in as {self.user} (ID: {self.user.id})")
 		print("------")
 
-		self.Database = Database()
-		self.Database.Create(self)
+		#self.Database = Database()
+		#self.Database.Create(self)
+		BrickDatabase.Create()
 
 	async def setup_hook(self):
 		self.tree.add_command(ping.ping)

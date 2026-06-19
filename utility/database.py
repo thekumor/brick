@@ -75,6 +75,18 @@ class Database:
 		if connection is not None:
 			connection.Do(f"UPDATE {table} SET {key} = {value} WHERE id = {id}", True)
 
+	def NewEntry(self, guild, table, keys, values):
+		connection = self.GetConnection(guild)
+
+		if self.connection is not None:
+			# #TODO: Check if this bugs or something.
+			formatValues = "".join(str(x) + ", " for x in values)[:-2]
+			formatKeys = "".join(str(x) + ", " for x in keys)[:-2]
+
+			connection.Do(f"""
+			INSERT INTO {table}({formatKeys}) VALUES({formatValues});
+			 """, True)
+
 	def GetValue(self, guild, table, id, key):
 		connection = self.GetConnection(guild)
 
@@ -95,3 +107,7 @@ class Database:
 
 		if value is not None:
 			self.SetValue(self, guild, table, id, key, int(value) + 1)
+
+global BrickDatabase
+def CreateGlobalDatabase():
+	BrickDatabase = Database()

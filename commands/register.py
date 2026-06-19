@@ -10,32 +10,15 @@
 from discord import app_commands
 import sqlite3
 import os
+from utility.database import BrickDatabase
 
 async def RegisterUsers(interaction):
-	path = "/var/brick/databases"
-
-	posts = sqlite3.connect(os.path.join(path, str(interaction.guild.id) + ".db"))
-	cursor = posts.cursor()
+	amount = 0
 
 	for member in interaction.guild.members:
-		if member.bot:
-			continue
+		BrickDatabase.NewEntry(interaction.guild, "users", ["discord_id", "char_count"], [member.id, 0])
+		amount += 1
 
-		cursor.execute(
-			"SELECT 1 FROM users WHERE discord_id = ?",
-			(member.id,)
-		)
-		exists = cursor.fetchone()
-
-		if not exists:
-			cursor.execute(
-				"INSERT INTO users(discord_id, char_count) VALUES(?, ?)",
-				(member.id, 0)
-				)
-		
-	posts.commit()
-	posts.close()
-
-	await interaction.response.send_message("Registered all users successfully", ephemeral = True)
+	await interaction.response.send_message(f"Registered all {amount} users successfully.", ephemeral = True)
 
 register = app_commands.Command(name="register", description="Registers everybody.", callback = RegisterUsers)
