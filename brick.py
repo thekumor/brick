@@ -17,19 +17,20 @@ from utility.database import Database
 
 load_dotenv()
 
-TOKEN = os.getenv('DISCORD_TOKEN')
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 class Client(discord.Client):
 	def __init__(self):
-		intents=discord.Intents.default()
+		intents = discord.Intents.default()
 		intents.message_content = True
-		super().__init__(intents=intents)
+		intents.members = True
+		super().__init__(intents = intents)
 
 		self.tree = app_commands.CommandTree(self)
 
 	async def on_ready(self):
-		print(f'Logged in as {self.user} (ID: {self.user.id})')
-		print('------')
+		print(f"Logged in as {self.user} (ID: {self.user.id})")
+		print("------")
 
 		self.Database = Database()
 		self.Database.Create(self)
