@@ -31,9 +31,6 @@ class Client(discord.Client):
 		utility.database.CreateGlobalDatabase()
 
 	async def on_ready(self):
-		print(f"Logged in as {self.user} (ID: {self.user.id})")
-		print("------")
-		
 		utility.database.BrickDatabase.Create(self)
 
 	async def setup_hook(self):
@@ -46,12 +43,12 @@ class Client(discord.Client):
 		if message.author.bot:
 			return
 		
-		oldValue = utility.database.BrickDatabase.GetValue(message.guild, "users", "char_count", message.author.id, "discord_id") or 0
+		oldValue = utility.database.BrickDatabase.GetValue(message.guild, "users", "discord_id", message.author.id, "char_count") or 0
 		
 		# I think this only applies to no-attachement messages or something.
 		newValue = oldValue + len(message.clean_content)
 
-		utility.database.BrickDatabase.SetValue(message.guild, "users", "char_count", message.author.id, "discord_id", newValue)
+		utility.database.BrickDatabase.SetValue(message.guild, "users", "discord_id", message.author.id, "char_count", newValue)
 
 client = Client()
 client.run(TOKEN)
