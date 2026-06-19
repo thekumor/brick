@@ -8,8 +8,6 @@
 # =================================================================
 
 from discord import app_commands, Permissions
-import sqlite3
-import os
 import utility.database
 
 async def RegisterUsers(interaction):

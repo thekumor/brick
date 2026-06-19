@@ -12,7 +12,7 @@ from discord import app_commands
 import os
 from dotenv import load_dotenv
 
-from commands import ping, register, chars
+from commands import ping, register, chars, leaderboard
 import utility.database
 
 load_dotenv()
@@ -37,6 +37,7 @@ class Client(discord.Client):
 		self.tree.add_command(ping.ping)
 		self.tree.add_command(register.register)
 		self.tree.add_command(chars.chars)
+		self.tree.add_command(leaderboard.leaderboard)
 		await self.tree.sync()
 
 	async def on_message(self, message):

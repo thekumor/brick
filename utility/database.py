@@ -31,6 +31,9 @@ class Connection:
 
 	def GetRow(self):
 		return self.cursor.fetchone()
+	
+	def GetRows(self):
+		return self.cursor.fetchall()
 
 
 class Database:
@@ -91,7 +94,7 @@ class Database:
 		connection = self.GetConnection(guild)
 
 		if connection is not None:
-			connection.Do(f"SELECT {key} FROM {table} WHERE {column} = {expected}")
+			connection.Do(f"SELECT {key} FROM {table} WHERE {column} = {expected};")
 
 			row = connection.GetRow()
 
@@ -99,6 +102,23 @@ class Database:
 				return None
 
 			return row[0]
+		
+		return None
+	
+	def GetValues(self, guild, table, columns, orderColumn):
+		connection = self.GetConnection(guild)
+
+		if connection is not None:
+			formatColumns = "".join(str(x) + ", " for x in columns)[:-2]
+
+			connection.Do(f"SELECT {formatColumns} FROM {table} ORDER BY {orderColumn} DESC;")
+
+			row = connection.GetRows()
+
+			if row is None:
+				return None
+
+			return row
 		
 		return None
 	
