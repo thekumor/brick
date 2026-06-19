@@ -78,7 +78,7 @@ class Database:
 	def NewEntry(self, guild, table, keys, values):
 		connection = self.GetConnection(guild)
 
-		if self.connection is not None:
+		if connection is not None:
 			# #TODO: Check if this bugs or something.
 			formatValues = "".join(str(x) + ", " for x in values)[:-2]
 			formatKeys = "".join(str(x) + ", " for x in keys)[:-2]
@@ -93,7 +93,7 @@ class Database:
 		if connection is not None:
 			connection.Do(f"SELECT {key} FROM {table} WHERE id = {id}")
 
-			row = connection.GetOne()
+			row = connection.GetRow()
 
 			if row is None:
 				return None
@@ -103,11 +103,12 @@ class Database:
 		return None
 	
 	def IncrementValue(self, guild, table, id, key):
-		value = self.GetValue(self, guild, table, id, key)
+		value = self.GetValue(guild, table, id, key)
 
 		if value is not None:
-			self.SetValue(self, guild, table, id, key, int(value) + 1)
+			self.SetValue(guild, table, id, key, int(value) + 1)
 
-global BrickDatabase
+BrickDatabase = None
 def CreateGlobalDatabase():
+	global BrickDatabase
 	BrickDatabase = Database()

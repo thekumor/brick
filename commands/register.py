@@ -16,7 +16,7 @@ async def RegisterUsers(interaction):
 	amount = 0
 
 	for member in interaction.guild.members:
-		BrickDatabase.NewEntry(interaction.guild, "users", ["discord_id", "char_count"], [member.id, 0])
+		utility.database.BrickDatabase.NewEntry(interaction.guild, "users", ["discord_id", "char_count"], [member.id, 0])
 		amount += 1
 
 	await interaction.response.send_message(f"Registered all {amount} users successfully.", ephemeral = True)
