@@ -44,9 +44,6 @@ class Client(discord.Client):
 	async def on_message(self, message):
 		if message.author.bot:
 			return
-	
-
-		
 
 client = Client()
 client.run(TOKEN)
