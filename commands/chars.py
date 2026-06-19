@@ -2,6 +2,9 @@
 #
 #	Tells the user how many characters they've typed.
 #
+#	#Module: Stats
+#	#Component: Message counter
+#
 #	#License: GPL-2.0-only
 #	#Authors: The Kumor
 #

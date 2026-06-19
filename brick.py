@@ -31,14 +31,20 @@ class Client(discord.Client):
 		print(f'Logged in as {self.user} (ID: {self.user.id})')
 		print('------')
 
-		db = Database()
-		db.Create(self)
+		self.Database = Database()
+		self.Database.Create(self)
 
 	async def setup_hook(self):
 		self.tree.add_command(ping.ping)
 		self.tree.add_command(register.register)
 		self.tree.add_command(chars.chars)
 		await self.tree.sync()
+
+	async def on_message(self, message):
+		if message.author.bot:
+			return
+	
+
 		
 
 client = Client()

@@ -18,6 +18,9 @@ async def RegisterUsers(interaction):
 	cursor = posts.cursor()
 
 	for member in interaction.guild.members:
+		if member.bot:
+			continue
+
 		cursor.execute(
 			"SELECT 1 FROM users WHERE discord_id = ?",
 			(member.id,)

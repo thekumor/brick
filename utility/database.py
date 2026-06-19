@@ -10,25 +10,58 @@
 import sqlite3
 import os
 
+class Connection:
+    def __init__(self, guildId, path):
+        self.guildId = guildId
+        self.connection = sqlite3.connect(path)
+        self.cursor = self.Cursor()
+
+    def __del__(self):
+        self.connection.close()
+        self.cursor.close()
+
+    def Cursor(self):
+        return self.connection.cursor()
+
+    async def Do(self, str, commit = False):
+        self.cursor.execute(str)
+
+        if commit:
+            self.connection.commit()
+
+    async def GetRow(self):
+        return self.cursor.fetchone()
+
+
 class Database:
     def __init__(self):
+        self.connections = []
         self.path = "/var/brick"
 
+    def GetFolderPath(self):
+        return os.path.join(self.path, "databases")
+
+    def GetPath(self, guild):
+        return os.path.join(self.GetFolderPath(), f"{guild.id}.db")
+
+    def GetConnection(self, guild):
+        for connection in self.connections:
+            if connection.guildId == guild.id:
+                return connection
+            
+        return None
+
     def Create(self, bot):
-        # #Section: folder creation
-        dir = os.path.join(self.path, "databases")
+        dir = self.GetFolderPath()
 
         if not os.path.exists(dir):
             os.mkdir(dir)
 
-        # #Section: database creation
-
         for guild in bot.guilds:
-            dbPath = os.path.join(dir, f"{guild.id}.db")
-            conn = sqlite3.connect(dbPath)
-            cursor = conn.cursor()
+            connection = Connection(guild.id, self.GetPath(guild))
+            self.connections.append(connection)
 
-            cursor.execute("""
+            connection.Do("""
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 discord_id INTEGER,
@@ -36,7 +69,29 @@ class Database:
             )
             """)
 
-            conn.commit()
-            conn.close()
+    async def SetValue(self, guild, table, id, key, value):
+        connection = self.GetConnection(guild)
+
+        if connection is not None:
+            connection.Do(f"UPDATE {table} SET {key} = {value} WHERE id = {id}", True)
+
+    async def GetValue(self, guild, table, id, key):
+        connection = self.GetConnection(guild)
+
+        if connection is not None:
+            connection.Do(f"SELECT {key} FROM {table} WHERE id = {id}")
+
+            row = connection.GetOne()
+
+            if row is None:
+                return None
+
+            return row[0]
         
-        # #EndSection
+        return None
+    
+    async def IncrementValue(self, guild, table, id, key):
+        value = self.GetValue(self, guild, table, id, key)
+        
+        if value is not None:
+            self.SetValue(self, guild, table, id, key, int(value) + 1)
