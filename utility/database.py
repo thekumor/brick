@@ -67,7 +67,7 @@ class Database:
                 discord_id INTEGER,
                 char_count INTEGER
             )
-            """)
+            """, True)
 
     async def SetValue(self, guild, table, id, key, value):
         connection = self.GetConnection(guild)
@@ -92,6 +92,6 @@ class Database:
     
     async def IncrementValue(self, guild, table, id, key):
         value = self.GetValue(self, guild, table, id, key)
-        
+
         if value is not None:
             self.SetValue(self, guild, table, id, key, int(value) + 1)
