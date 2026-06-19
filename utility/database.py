@@ -23,13 +23,13 @@ class Connection:
     def Cursor(self):
         return self.connection.cursor()
 
-    async def Do(self, str, commit = False):
-        self.cursor.execute(str)
+    def Do(self, cmd, commit = False):
+        self.cursor.execute(cmd)
 
         if commit:
             self.connection.commit()
 
-    async def GetRow(self):
+    def GetRow(self):
         return self.cursor.fetchone()
 
 
@@ -69,13 +69,13 @@ class Database:
             )
             """, True)
 
-    async def SetValue(self, guild, table, id, key, value):
+    def SetValue(self, guild, table, id, key, value):
         connection = self.GetConnection(guild)
 
         if connection is not None:
             connection.Do(f"UPDATE {table} SET {key} = {value} WHERE id = {id}", True)
 
-    async def GetValue(self, guild, table, id, key):
+    def GetValue(self, guild, table, id, key):
         connection = self.GetConnection(guild)
 
         if connection is not None:
@@ -90,7 +90,7 @@ class Database:
         
         return None
     
-    async def IncrementValue(self, guild, table, id, key):
+    def IncrementValue(self, guild, table, id, key):
         value = self.GetValue(self, guild, table, id, key)
 
         if value is not None:
