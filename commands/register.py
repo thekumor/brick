@@ -25,4 +25,5 @@ async def RegisterUsers(interaction):
 
 	await interaction.response.send_message(f"Registered all {amount} users successfully.", ephemeral = True)
 
-register = app_commands.Command(name="register", description="Registers everybody.", default_permissions = Permissions(administrator = True), callback = RegisterUsers)
+register = app_commands.Command(name="register", description="Registers everybody.", callback = RegisterUsers)
+register.default_permissions = Permissions(administrator = True)
