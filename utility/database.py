@@ -78,10 +78,6 @@ class Database:
 			);
 			""", True)
 
-				BrickDatabase.Do("""
-	
-	""")
-
 	def SetValue(self, guild, table, column, expected, key, value):
 		connection = self.GetConnection(guild)
 
