@@ -12,7 +12,11 @@ from discord import app_commands
 import time
 
 async def AskForDaily(interaction):
-	values = utility.database.BrickDatabase.GetValues(interaction.guild, "economy", "discord_id", interaction.user.id, ["money", "last_daily"]) or []
+	values = utility.database.BrickDatabase.GetValues(interaction.guild, "economy", "discord_id", interaction.user.id, ["money", "last_daily"])
+	
+	if values is None:
+		await interaction.response.send_message(f"Something went wrong :(", ephemeral = True)
+		return
 
 	oldCount = values[0]
 	lastDaily = values[1]
