@@ -14,7 +14,7 @@ from discord import app_commands
 import utility.database
 
 async def ShowLeaderboard(interaction):
-	charCounts = utility.database.BrickDatabase.GetValues(interaction.guild, "users", ["discord_id", "char_count"], "char_count") or []
+	charCounts = utility.database.BrickDatabase.GetValuesByOrder(interaction.guild, "users", ["discord_id", "char_count"], "char_count") or []
 
 	i = 1
 	lines = []

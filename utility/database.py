@@ -123,7 +123,24 @@ class Database:
 		
 		return None
 	
-	def GetValues(self, guild, table, columns, orderColumn):
+	def GetValues(self, guild, table, column, expected, keys):
+		connection = self.GetConnection(guild)
+
+		if connection is not None:
+			formatKeys = "".join(str(x) + ", " for x in keys)[:-2]
+
+			connection.Do(f"SELECT {formatKeys} FROM {table} WHERE {column} = {expected};")
+
+			row = connection.GetRow()
+
+			if row is None:
+				return None
+			
+			return row[0]
+		
+		return None
+	
+	def GetValuesByOrder(self, guild, table, columns, orderColumn):
 		connection = self.GetConnection(guild)
 
 		if connection is not None:
