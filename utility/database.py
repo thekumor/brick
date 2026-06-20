@@ -131,12 +131,8 @@ class Database:
 
 			connection.Do(f"SELECT {formatKeys} FROM {table} WHERE {column} = {expected};")
 
-			row = connection.GetRow()
-
-			if row is None:
-				return None
-			
-			return row[0]
+			rows = connection.GetRows()
+			return rows
 		
 		return None
 	
@@ -148,9 +144,8 @@ class Database:
 
 			connection.Do(f"SELECT {formatColumns} FROM {table} ORDER BY {orderColumn} DESC;")
 
-			row = connection.GetRows()
-
-			return row
+			rows = connection.GetRows()
+			return rows
 		
 		return None
 	
