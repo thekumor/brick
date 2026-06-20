@@ -24,7 +24,7 @@ async def RegisterUsers(interaction):
 			added = True
 
 		if utility.database.BrickDatabase.GetValue(interaction.guild, "economy", "discord_id", member.id, "*") is None:
-			utility.database.BrickDatabase.NewEntry(interaction.guild, "economy", ["discord_id", "money"], [member.id, 0])
+			utility.database.BrickDatabase.NewEntry(interaction.guild, "economy", ["discord_id", "money", "last_daily"], [member.id, 0, 0])
 			added = True
 
 		if added:
