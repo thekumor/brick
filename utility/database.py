@@ -74,7 +74,7 @@ class Database:
 
 			connection.Do("""
 			CREATE TABLE IF NOT EXISTS economy(
-				id INTEGER PRIMARY KEY AUTO_INCREMENT,
+				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				user_id INTEGER,
 				money INTEGER
 			);
