@@ -69,8 +69,18 @@ class Database:
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				discord_id INTEGER,
 				char_count INTEGER
-			)
+			);
+				 
+			CREATE TABLE IF NOT EXISTS economy(
+				id INTEGER PRIMARY KEY AUTO_INCREMENT,
+				user_id INTEGER,
+				money INTEGER,
+			);
 			""", True)
+
+				BrickDatabase.Do("""
+	
+	""")
 
 	def SetValue(self, guild, table, column, expected, key, value):
 		connection = self.GetConnection(guild)
