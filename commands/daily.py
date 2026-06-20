@@ -14,7 +14,7 @@ import time
 async def AskForDaily(interaction):
 	values = utility.database.BrickDatabase.GetValues(interaction.guild, "economy", "discord_id", interaction.user.id, ["money", "last_daily"])
 	
-	if values is None:
+	if len(values) == 0:
 		await interaction.response.send_message(f"Something went wrong :(", ephemeral = True)
 		return
 
