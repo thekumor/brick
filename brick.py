@@ -13,7 +13,7 @@ import os
 from dotenv import load_dotenv
 
 from commands import ping, register, chars, leaderboard, daily
-import utility.database, utility.economy
+import utility.database
 
 load_dotenv()
 
@@ -32,7 +32,6 @@ class Client(discord.Client):
 
 	async def on_ready(self):
 		utility.database.BrickDatabase.Create(self)
-		utility.economy.CreateEconomyTable()
 
 	async def setup_hook(self):
 		self.tree.add_command(ping.ping)

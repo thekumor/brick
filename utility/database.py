@@ -74,7 +74,7 @@ class Database:
 			CREATE TABLE IF NOT EXISTS economy(
 				id INTEGER PRIMARY KEY AUTO_INCREMENT,
 				user_id INTEGER,
-				money INTEGER,
+				money INTEGER
 			);
 			""", True)
 
