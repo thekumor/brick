@@ -1,11 +1,11 @@
-# ================================================================
+# ===============================================================
 #
 #	Logs the bot.
 #
 #	#License: GPL-2.0-only
 #	#Authors: The Kumor
 #
-# =================================================================
+# ===============================================================
 
 import discord
 from discord import app_commands
@@ -47,8 +47,6 @@ class Client(discord.Client):
 			return
 		
 		oldValue = utility.database.BrickDatabase.GetValue(message.guild, "users", "discord_id", message.author.id, "char_count") or 0
-		
-		# I think this only applies to no-attachement messages or something.
 		newValue = oldValue + len(message.clean_content)
 
 		utility.database.BrickDatabase.SetValue(message.guild, "users", "discord_id", message.author.id, "char_count", newValue)

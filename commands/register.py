@@ -1,11 +1,11 @@
-# ================================================================
+# ===============================================================
 #
 #	Registers every user on the server for database (omits bots).
 #
 #	#License: GPL-2.0-only
 #	#Authors: The Kumor
 #
-# =================================================================
+# ===============================================================
 
 from discord import app_commands, Permissions
 import utility.database
@@ -30,7 +30,7 @@ async def RegisterUsers(interaction):
 		if added:
 			amount += 1
 
-	await interaction.response.send_message(f"Registered all {amount} users successfully.", ephemeral = True)
+	await interaction.response.send_message(f"Registered all { amount } users successfully.", ephemeral = True)
 
-register = app_commands.Command(name="register", description="Registers everybody.", callback = RegisterUsers)
+register = app_commands.Command(name = "register", description = "Registers everybody.", callback = RegisterUsers)
 register.default_permissions = Permissions(administrator = True)

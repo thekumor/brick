@@ -1,11 +1,11 @@
-# ================================================================
+# ===============================================================
 #
 #	Gives user money (given they didn't get it that day).
 #
 #	#License: GPL-2.0-only
 #	#Authors: The Kumor
 #
-# =================================================================
+# ===============================================================
 
 import utility.database
 from discord import app_commands
@@ -38,6 +38,6 @@ async def AskForDaily(interaction):
 
 	utility.database.BrickDatabase.SetValues(interaction.guild, "economy", "discord_id", interaction.user.id, ["money", "last_daily"], [newCount, time])
 
-	await interaction.response.send_message(f"You received your daily of {daily}€! You now have {newCount}. 💶", ephemeral = False)
+	await interaction.response.send_message(f"You received your daily of { daily }€! You now have { newCount }. 💶", ephemeral = False)
 
-daily = app_commands.Command(name="daily", description="Gives you money (per day).", callback = AskForDaily)
+daily = app_commands.Command(name = "daily", description = "Gives you money (per day).", callback = AskForDaily)

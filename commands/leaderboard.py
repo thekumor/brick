@@ -1,4 +1,4 @@
-# ================================================================
+# ===============================================================
 #
 #	Shows user leaderboard for a particular server.
 #
@@ -8,7 +8,7 @@
 #	#License: GPL-2.0-only
 #	#Authors: The Kumor
 #
-# =================================================================
+# ===============================================================
 
 from discord import app_commands
 import utility.database
@@ -32,8 +32,8 @@ async def ShowLeaderboard(interaction):
 			break
 
 	leaderboardMessageString = "".join(lines)
-	leaderboardMessageString = f"# === {interaction.guild.name} Leaderboard ===\n" + leaderboardMessageString
+	leaderboardMessageString = f"# === { interaction.guild.name } Leaderboard ===\n" + leaderboardMessageString
 
 	await interaction.response.send_message(leaderboardMessageString, ephemeral = False)
 
-leaderboard = app_commands.Command(name="leaderboard", description="Shows user leaderboard.", callback = ShowLeaderboard)
+leaderboard = app_commands.Command(name = "leaderboard", description = "Shows user leaderboard.", callback = ShowLeaderboard)
