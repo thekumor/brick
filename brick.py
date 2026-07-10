@@ -12,7 +12,7 @@ from discord import app_commands
 import os
 from dotenv import load_dotenv
 import json
-import time
+import datetime
 
 from commands import ping, register, chars, leaderboard, daily, throw
 import utility.database
@@ -75,7 +75,7 @@ class Client(discord.Client):
 				embed.add_field(name = "Link", value = "[goto](" + link + ")")
 				embed.add_field(name = "Content", value = message.content)
 				embed.set_author(name = message.author.name, icon_url = message.author.avatar.url)
-				embed.timestamp = time.localtime()
+				embed.timestamp = datetime.datetime
 				channelObj = await self.fetch_channel(str(channel))
 				if channelObj is not None:
 					await channelObj.send(embed = embed)
