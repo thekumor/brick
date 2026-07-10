@@ -72,7 +72,7 @@ class Client(discord.Client):
 
 				embed = discord.Embed(title = "Message", description = "Message was sent.", color = 0xffffff)
 				embed.add_field(name = "Channel", value = message.channel.name)
-				embed.add_field(name = "Author", value = message.author.name, icon_url = message.author.avatar_url)
+				embed.add_field(name = "Author", value = message.author.name, icon_url = message.author.avatar.url)
 				embed.add_field(name = "Link", value = "[goto](" + link + ")")
 				embed.add_field(name = "Content", value = message.content)
 				embed.timestamp = time.localtime()
