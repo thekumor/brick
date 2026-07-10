@@ -60,16 +60,18 @@ class Client(discord.Client):
 		utility.database.BrickDatabase.SetValue(message.guild, "users", "discord_id", message.author.id, "char_count", newValue)
 
 		# --------------------------------------------------------
-		#	#Section: Message logging
+		#       #Section: Message logging
 		# --------------------------------------------------------
-		guildSettings = self.Settings[message.guild.id]
+		guildSettings = self.Settings[str(message.guild.id)]
 
 		if guildSettings is not None:
-			channel = self.Settings[message.guild.id]["LogChannel"]
+			channel = self.Settings[str(message.guild.id)]["LogChannel"]
 			if channel is not None:
-				embed = discord.Embed(title = "Message", description = "Message was sent.", color = 0xff0000)
+				embed = discord.Embed(title = "Message", description = "Message was sent.", color = 0xffffff)
 				embed.add_field(name = "Content", value = message.content)
-				await channel.send(embed = embed)
+				channelObj = await self.fetch_channel(str(channel))
+				if channelObj is not None:
+					await channelObj.send(embed = embed)
 
 
 client = Client()
