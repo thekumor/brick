@@ -1,6 +1,6 @@
 # ===============================================================
 #
-#	Logs the bot.
+#	Logs the bot. Listens for events.
 #
 #	#License: GPL-2.0-only
 #	#Authors: The Kumor
@@ -11,6 +11,7 @@ import discord
 from discord import app_commands
 import os
 from dotenv import load_dotenv
+import json
 
 from commands import ping, register, chars, leaderboard, daily, throw
 import utility.database
@@ -30,6 +31,9 @@ class Client(discord.Client):
 
 		utility.database.CreateGlobalDatabase()
 
+		with open("settings.json") as settings:
+			self.Settings = json.load(settings)
+
 	async def on_ready(self):
 		utility.database.BrickDatabase.Create(self)
 
@@ -47,10 +51,26 @@ class Client(discord.Client):
 		if message.author.bot:
 			return
 		
+		# --------------------------------------------------------
+		#	#Section: Character stats
+		# --------------------------------------------------------
 		oldValue = utility.database.BrickDatabase.GetValue(message.guild, "users", "discord_id", message.author.id, "char_count") or 0
 		newValue = oldValue + len(message.clean_content)
 
 		utility.database.BrickDatabase.SetValue(message.guild, "users", "discord_id", message.author.id, "char_count", newValue)
+
+		# --------------------------------------------------------
+		#	#Section: Message logging
+		# --------------------------------------------------------
+		guildSettings = self.Settings[message.guild.id]
+
+		if guildSettings is not None:
+			channel = self.Settings[message.guild.id]["LogChannel"]
+			if channel is not None:
+				embed = discord.Embed(title = "Message", description = "Message was sent.", color = 0xff0000)
+				embed.add_field(name = "Content", value = message.content)
+				await channel.send(embed = embed)
+
 
 client = Client()
 client.run(TOKEN)
