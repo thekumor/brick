@@ -12,6 +12,7 @@ from discord import app_commands
 import os
 from dotenv import load_dotenv
 import json
+import time
 
 from commands import ping, register, chars, leaderboard, daily, throw
 import utility.database
@@ -67,8 +68,14 @@ class Client(discord.Client):
 		if guildSettings is not None:
 			channel = self.Settings[str(message.guild.id)]["LogChannel"]
 			if channel is not None:
+				link = message.jump_url
+
 				embed = discord.Embed(title = "Message", description = "Message was sent.", color = 0xffffff)
+				embed.add_field(name = "Channel", value = message.channel.name)
+				embed.add_field(name = "Author", value = message.author.name, icon_url = message.author.avatar_url)
+				embed.add_field(name = "Link", value = "[goto](" + link + ")")
 				embed.add_field(name = "Content", value = message.content)
+				embed.timestamp = time.localtime()
 				channelObj = await self.fetch_channel(str(channel))
 				if channelObj is not None:
 					await channelObj.send(embed = embed)
