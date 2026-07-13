@@ -8,9 +8,5 @@
 # ===============================================================
 
 from discord import app_commands
-import discord
 
-async def Display(interaction: discord.Interaction):
-	await interaction.response.send_message(f"Member count: { interaction.guild.members.count }")
-
-members = app_commands.Command(name = "members", description = "Displays how many people are on the server.", callback = Display)
+members = app_commands.Command(name = "members", description = "Displays how many people are on the server.", callback = lambda interaction: interaction.response.send_message(f"Member count: {interaction.message.guild.member_count}"))
