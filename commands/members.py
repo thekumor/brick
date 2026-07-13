@@ -7,7 +7,7 @@
 #
 # ===============================================================
 
-from discord import app_commands, Permissions
+from discord import app_commands
 import discord
 
 async def Display(interaction: discord.Interaction, target: discord.Member):
