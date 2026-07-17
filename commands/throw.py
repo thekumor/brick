@@ -12,8 +12,8 @@ import discord
 import utility.locale
 
 async def Throw(interaction: discord.Interaction, target: discord.Member):
-	settings = Settings[interaction.guild.id]
-	translation = utility.locale.Locale("locale_throw", settings["locale_throw"]) if settings is not None else "heh"
+	language = interaction.client.Settings[interaction.guild.id]
+	translation = utility.locale.Locale("locale_throw", language)
 
 	await interaction.response.send_message(f"{interaction.user.mention} {translation} {target.mention}!")
 

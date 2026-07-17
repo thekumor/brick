@@ -21,12 +21,6 @@ load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 
-Settings = None
-def CreateGlobalSettings():
-	global Settings
-	with open("settings.json") as settings:
-		Settings = json.load(settings)
-
 class Client(discord.Client):
 	def __init__(self):
 		intents = discord.Intents.default()
@@ -38,7 +32,9 @@ class Client(discord.Client):
 
 		utility.database.CreateGlobalDatabase()
 		utility.locale.CreateGlobalLanguage()
-		CreateGlobalSettings()
+		
+		with open("settings.json") as settings:
+			self.Settings = json.load(settings)
 
 	async def on_ready(self):
 		utility.database.BrickDatabase.Create(self)
@@ -70,7 +66,7 @@ class Client(discord.Client):
 		# --------------------------------------------------------
 		#       #Section: Message logging
 		# --------------------------------------------------------
-		guildSettings = Settings[str(message.guild.id)]
+		guildSettings = self.Settings[str(message.guild.id)]
 
 		if guildSettings is not None:
 			channel = guildSettings["LogChannel"]

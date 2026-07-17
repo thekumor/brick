@@ -16,8 +16,8 @@ def CreateGlobalLanguage():
 	with open("locale.json") as loc:
 		Language = json.load(loc)
 
-def Locale(name, lang):
+def Locale(name, lang, fallback = "heh"):
 	if Language[name] is not None:
 		return Language[name][lang]
 	
-	return None
+	return fallback
