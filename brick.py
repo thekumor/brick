@@ -13,13 +13,19 @@ import os
 from dotenv import load_dotenv
 import json
 
-from commands import ping, register, chars, leaderboard, daily, throw, members
+from commands import ping, register, chars, leaderboard, daily, throw, members, ai
 import utility.database
 import utility.locale
 
 load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")
+
+Settings = None
+def CreateGlobalSettings():
+	global Settings
+	with open("settings.json") as settings:
+		Settings = json.load(settings)
 
 class Client(discord.Client):
 	def __init__(self):
@@ -32,9 +38,7 @@ class Client(discord.Client):
 
 		utility.database.CreateGlobalDatabase()
 		utility.locale.CreateGlobalLanguage()
-
-		with open("settings.json") as settings:
-			self.Settings = json.load(settings)
+		CreateGlobalSettings()
 
 	async def on_ready(self):
 		utility.database.BrickDatabase.Create(self)
@@ -47,6 +51,7 @@ class Client(discord.Client):
 		self.tree.add_command(daily.daily)
 		self.tree.add_command(throw.throw)
 		self.tree.add_command(members.members)
+		self.tree.add_command(ai.ai)
 
 		await self.tree.sync()
 
@@ -65,7 +70,7 @@ class Client(discord.Client):
 		# --------------------------------------------------------
 		#       #Section: Message logging
 		# --------------------------------------------------------
-		guildSettings = self.Settings[str(message.guild.id)]
+		guildSettings = Settings[str(message.guild.id)]
 
 		if guildSettings is not None:
 			channel = guildSettings["LogChannel"]
