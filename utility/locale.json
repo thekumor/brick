@@ -21,5 +21,11 @@
 	{
 		"en":		"Link",
 		"pl":		"Link"
+	},
+
+	"locale_throw":
+	{
+		"en":		"throws a brick at",
+		"pl":		"rzuca cegłą w"
 	}
 }
