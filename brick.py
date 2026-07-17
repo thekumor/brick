@@ -15,6 +15,7 @@ import json
 
 from commands import ping, register, chars, leaderboard, daily, throw, members
 import utility.database
+import utility.locale
 
 load_dotenv()
 
@@ -30,6 +31,7 @@ class Client(discord.Client):
 		self.tree = app_commands.CommandTree(self)
 
 		utility.database.CreateGlobalDatabase()
+		utility.locale.CreateGlobalLanguage()
 
 		with open("settings.json") as settings:
 			self.Settings = json.load(settings)
@@ -66,14 +68,15 @@ class Client(discord.Client):
 		guildSettings = self.Settings[str(message.guild.id)]
 
 		if guildSettings is not None:
-			channel = self.Settings[str(message.guild.id)]["LogChannel"]
+			channel = guildSettings["LogChannel"]
 			if channel is not None:
 				link = message.jump_url
+				serverLanguage = guildSettings["Language"]
 
-				embed = discord.Embed(title = "Message", description = "", color = 0xffffff)
-				embed.add_field(name = "Content", value = message.content, inline = False)
-				embed.add_field(name = "Channel", value = message.channel.name, inline = False)
-				embed.add_field(name = "Link", value = "[here](" + link + ")", inline = False)
+				embed = discord.Embed(title = utility.locale.Locale("locale_message", serverLanguage), description = "", color = 0xffffff)
+				embed.add_field(name = utility.locale.Locale("locale_content", serverLanguage), value = message.content, inline = False)
+				embed.add_field(name = utility.locale.Locale("locale_channel", serverLanguage), value = message.channel.name, inline = False)
+				embed.add_field(name = utility.locale.Locale("locale_link", serverLanguage), value = "[here](" + link + ")", inline = False)
 				embed.set_author(name = message.author.name, icon_url = message.author.avatar.url)
 				embed.timestamp = message.created_at
 				channelObj = await self.fetch_channel(str(channel))

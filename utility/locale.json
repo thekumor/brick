@@ -1,0 +1,25 @@
+{
+	"locale_message":
+	{
+		"en":		"Message",
+		"pl":		"Wiadomość"
+	},
+
+	"locale_content":
+	{
+		"en":		"Content",
+		"pl":		"Zawartość"
+	},
+
+	"locale_channel":
+	{
+		"en":		"Channel",
+		"pl":		"Kanał"
+	},
+
+	"locale_link":
+	{
+		"en":		"Link",
+		"pl":		"Link"
+	}
+}

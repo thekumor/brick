@@ -3,27 +3,31 @@
 	{
 		"Name":			"Mangokawka",
 		"Currency":		"Mango",
-		"LogChannel":	"1525072923445170276"
+		"LogChannel":	"1525072923445170276",
+		"Language":		"pl"
 	},
 
 	"1513077038452576266":
 	{
 		"Name":			"Project Cloud",
 		"Currency":		"Euro",
-		"LogChannel":	"1525073185320472636"
+		"LogChannel":	"1525073185320472636",
+		"Language":		"en"
 	},
 
 	"1506548591160987668":
 	{
 		"Name":			"Dev Environment",
 		"Currency":		"Euro",
-		"LogChannel":	"1525073338773274674"
+		"LogChannel":	"1525073338773274674",
+		"Language":		"en"
 	},
 
 	"1264911714013417563":
 	{
 		"Name": 		"Pyszczki",
 		"Currency":		"Pyszczcoin",
-		"LogChannel": 	"1454009165596069918"
+		"LogChannel": 	"1454009165596069918",
+		"Language":		"pl"
 	}
 }
