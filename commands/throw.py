@@ -12,7 +12,7 @@ import discord
 import utility.locale
 
 async def Throw(interaction: discord.Interaction, target: discord.Member):
-	language = interaction.client.Settings[interaction.guild.id]
+	language = interaction.client.Settings[str(interaction.guild.id)]
 	translation = utility.locale.Locale("locale_throw", language)
 
 	await interaction.response.send_message(f"{interaction.user.mention} {translation} {target.mention}!")
