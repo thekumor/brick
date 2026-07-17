@@ -13,7 +13,7 @@ Language = None
 def CreateGlobalLanguage():
 	global Language
 
-	with open("locale.json") as loc:
+	with open("utility/locale.json") as loc:
 		Language = json.load(loc)
 
 def Locale(name, lang, fallback = "heh"):
