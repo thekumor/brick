@@ -77,13 +77,12 @@ class Client(discord.Client):
 				embed = discord.Embed(title = utility.locale.Locale("locale_message", serverLanguage), description = "", color = 0xffffff)
 				embed.add_field(name = utility.locale.Locale("locale_content", serverLanguage), value = message.content, inline = False)
 				embed.add_field(name = utility.locale.Locale("locale_channel", serverLanguage), value = message.channel.name, inline = False)
-				embed.add_field(name = utility.locale.Locale("locale_link", serverLanguage), value = "[here](" + link + ")", inline = False)
+				embed.add_field(name = utility.locale.Locale("locale_link", serverLanguage), value = "[" + utility.locale.Locale("locale_here", serverLanguage) + "](" + link + ")", inline = False)
 				embed.set_author(name = message.author.name, icon_url = message.author.avatar.url)
 				embed.timestamp = message.created_at
 				channelObj = await self.fetch_channel(str(channel))
 				if channelObj is not None:
 					await channelObj.send(embed = embed)
-
 
 client = Client()
 client.run(TOKEN)

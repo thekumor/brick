@@ -27,5 +27,11 @@
 	{
 		"en":		"throws a brick at",
 		"pl":		"rzuca cegłą w"
+	},
+
+	"locale_here":
+	{
+		"en":		"here",
+		"pl":		"tutaj"
 	}
 }
