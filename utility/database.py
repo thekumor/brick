@@ -95,7 +95,10 @@ class Database:
 			for i in enumerate(values):
 				format += keys[i] + " = " + values[i] + ", "
 
+		if expected is not None:
 			connection.Do(f"UPDATE {table} SET {format} WHERE {column} = {expected}", True)
+		else:
+			connection.Do(f"UPDATE {table} SET {format}", True)
 
 	def NewEntry(self, guild, table, keys, values):
 		connection = self.GetConnection(guild)
