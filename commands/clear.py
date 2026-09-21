@@ -11,7 +11,7 @@ from discord import app_commands, Permissions
 import utility.database
 
 async def ClearUsers(interaction):
-	utility.database.BrickDatabase.SetValues(interaction.guild, "users", "", "", {"char_count"}, {0})
+	utility.database.BrickDatabase.SetAllValues(interaction.guild, "users", "char_count", 0)
 
 	await interaction.response.send_message(f"Cleared all users successfully.", ephemeral = False)
 
