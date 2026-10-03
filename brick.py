@@ -84,5 +84,12 @@ class Client(discord.Client):
 				if channelObj is not None:
 					await channelObj.send(embed = embed)
 
+	async def on_member_join(self, member):
+		if member.bot:
+			return
+
+		if utility.database.BrickDatabase.GetValue(member.guild, "users", "discord_id", member.id, "*") is None:
+			utility.database.BrickDatabase.NewEntry(member.guild, "users", ["discord_id", "char_count"], [member.id, 0])
+
 client = Client()
 client.run(TOKEN)
