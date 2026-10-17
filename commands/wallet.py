@@ -14,4 +14,4 @@ async def GetMoney(interaction):
 	count = utility.database.BrickDatabase.GetValue(interaction.guild, "economy", "discord_id", interaction.user.id, "money") or 0
 	await interaction.response.send_message(f"Your money: { count }", ephemeral = True)
 
-wallet = app_commands.Command(name = "chars", description = "Tells how much money you have.", callback = GetMoney)
+wallet = app_commands.Command(name = "wallet", description = "Tells how much money you have.", callback = GetMoney)
