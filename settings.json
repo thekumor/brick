@@ -1,12 +1,4 @@
 {
-	"1519393835103293550":
-	{
-		"Name":			"Mangokawka",
-		"Currency":		"Mango",
-		"LogChannel":	"1525072923445170276",
-		"Language":		"pl"
-	},
-
 	"1513077038452576266":
 	{
 		"Name":			"Project Cloud",
@@ -36,6 +28,14 @@
 		"Name":			"Śląsk",
 		"Currency":		"Węgiel",
 		"LogChannel":	"1560192856625520730",
+		"Language":		"pl"
+	},
+
+	"684441606375604255":
+	{
+		"Name":			"Podwórko",
+		"Currency":		"PLN",
+		"LogChannel":	"957747396526370877",
 		"Language":		"pl"
 	}
 }
