@@ -11,8 +11,8 @@ from discord import app_commands, Permissions
 import discord
 from translate import Translator
 
-async def Translate(interaction: discord.Interaction, text: str):
-    translator = Translator(to_lang="pl")
+async def Translate(interaction: discord.Interaction, text: str, language: str):
+    translator = Translator(to_lang=language)
     translation = translator.translate(text)
     await interaction.response.send_message(translation)
 
