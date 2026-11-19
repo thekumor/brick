@@ -37,5 +37,13 @@
 		"Currency":		"PLN",
 		"LogChannel":	"957747396526370877",
 		"Language":		"pl"
+	},
+
+	"1510601840696496138":
+	{
+		"Name":			"Srebrzysko",
+		"Currency":		"Zolpidem",
+		"LogChannel":	"1568288403567415397",
+		"Language":		"pl"
 	}
 }
