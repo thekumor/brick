@@ -7,7 +7,8 @@
 #
 # ===============================================================
 
-from discord import app_commands
+from discord import app_commands, Permissions
+import discord
 from translate import Translator
 
 async def Translate(interaction: discord.Interaction, text: discord.Message):
