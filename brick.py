@@ -13,7 +13,7 @@ import os
 from dotenv import load_dotenv
 import json
 
-from commands import ping, register, chars, leaderboard, throw, members, clear, wallet, translate
+from commands import ping, register, chars, leaderboard, throw, members, clear, wallet, translate, translateMessage
 import utility.database
 import utility.locale
 
@@ -49,6 +49,7 @@ class Client(discord.Client):
 		self.tree.add_command(clear.clear)
 		self.tree.add_command(wallet.wallet)
 		self.tree.add_command(translate.translate)
+		self.tree.add_command(translateMessage.translate)
 
 		await self.tree.sync()
 
